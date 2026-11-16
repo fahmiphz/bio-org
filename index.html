@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fahmi Pahrezi — Links</title>
+<meta name="description" content="Mochamad Fahmi Pahrezi — Software Engineer & Cloud Architect. Project, kontak, dan link lainnya.">
+<meta name="theme-color" content="#EDEBE6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDEBE6;
+    --sheet: #F4F2ED;
+    --ink: #141414;
+    --muted: #6D6A63;
+    --cobalt: #1F3FB0;
+    --rule: rgba(20,20,20,.9);
+    --ease: cubic-bezier(.2,.8,.2,1);
+    --H: min(46vh, 31vw);
+    --sans: "Inter Tight", system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--sans);
+    overflow: hidden; user-select: none; -webkit-user-select: none;
+    -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+  @media (pointer: fine) { html, body, button, a { cursor: none; } }
+
+  .grain {
+    position: fixed; inset: 0; z-index: 40; pointer-events: none;
+    mix-blend-mode: multiply; opacity: .55;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .42  0 0 0 0 .38  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .lbl { font-family: var(--sans); font-weight: 600; font-size: 10.5px; line-height: 1; letter-spacing: .09em; text-transform: uppercase; }
+  .box { display: inline-flex; align-items: center; height: 21px; padding: 0 8px; border: 1px solid var(--rule); }
+
+  /* ---------- top bar ---------- */
+  .top {
+    position: fixed; top: 0; left: 0; right: 0; height: 84px; padding: 0 32px; z-index: 30;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  }
+  .top > :first-child { justify-self: start; }
+  .top > :last-child { justify-self: end; }
+  .logo { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--cobalt); }
+  .logo b { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1; letter-spacing: -.01em; }
+  .logo span { font-weight: 600; font-size: 9px; letter-spacing: .34em; padding-left: .34em; text-transform: uppercase; }
+
+  /* ---------- tabs ---------- */
+  .tabs {
+    position: fixed; left: 50%; top: calc(50% - var(--H) / 2 - 86px); transform: translateX(-50%);
+    display: flex; z-index: 30;
+  }
+  .tabs button { position: relative; z-index: 1; height: 23px; padding: 0 11px; border: 1px solid var(--rule); margin-left: -1px; white-space: nowrap; transition: color .45s var(--ease); }
+  .tabs button.on { color: #fff; }
+  .tabs i { position: absolute; top: 0; left: 0; height: 23px; background: var(--cobalt); transition: width .6s var(--ease), transform .6s var(--ease); }
+
+  /* ---------- shelf ---------- */
+  .shelf {
+    position: fixed; left: 0; right: 0; top: calc(50% - var(--H) / 2 - 40px); height: calc(var(--H) + 80px);
+    perspective: 2200px; perspective-origin: 50% 50%; touch-action: pan-y; z-index: 10;
+  }
+  .stage { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+  .tape { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; will-change: transform; }
+  .face {
+    position: absolute; top: calc(var(--Hp) / -2); height: var(--Hp);
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: 2px; overflow: hidden;
+    background-color: var(--bg); color: var(--fg);
+    background-image: linear-gradient(90deg, rgba(0,0,0,.16), transparent 14%, transparent 86%, rgba(0,0,0,.18)),
+                      linear-gradient(180deg, rgba(255,255,255,.08), transparent 30%, rgba(0,0,0,.08));
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+  .face::after { content: ""; position: absolute; inset: 0; background: #000; opacity: var(--shade, 0); pointer-events: none; }
+
+  .sp {
+    width: var(--ws); left: calc(var(--ws) / -2); transform: translateZ(calc(var(--d) / 2));
+    display: flex; flex-direction: column; align-items: center; gap: calc(var(--ws) * .22);
+    padding: calc(var(--ws) * .2) 0 calc(var(--ws) * .22);
+  }
+  .sp-dot { flex: none; width: 58%; aspect-ratio: 1; border-radius: 50%; background: var(--ac); box-shadow: 0 0 0 calc(var(--ws) * .06) var(--bg), 0 0 0 calc(var(--ws) * .1) var(--fg); }
+  .sp-dot { position: relative; }
+  .sp-dot.ic::before { content: ""; position: absolute; inset: 23%; background: var(--on); -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+  .sp-no { font-weight: 600; font-size: calc(var(--ws) * .19); letter-spacing: .06em; }
+  .sp-title {
+    flex: 1; min-height: 0; writing-mode: vertical-rl; display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: calc(var(--ws) * .46 * var(--fs, 1)); line-height: 1; letter-spacing: .03em;
+    text-transform: uppercase; white-space: nowrap; overflow: hidden;
+  }
+  .sp-name { writing-mode: vertical-rl; font-weight: 600; font-size: calc(var(--ws) * .13); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+  .vhs { border: 1px solid currentColor; font-weight: 600; letter-spacing: .06em; line-height: 1; }
+  .sp .vhs { font-size: calc(var(--ws) * .17); padding: calc(var(--ws) * .06) calc(var(--ws) * .05); }
+
+  .cv {
+    width: var(--d); left: calc(var(--d) / -2); transform: rotateY(90deg) translateZ(calc(var(--ws) / 2));
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12), 0 30px 60px -28px rgba(20,16,10,.55);
+    display: flex; flex-direction: column; gap: calc(var(--d) * .045); padding: calc(var(--d) * .075);
+  }
+  .cv-top, .cv-bot { display: flex; justify-content: space-between; align-items: center; font-weight: 600; text-transform: uppercase; }
+  .cv-top { font-size: calc(var(--d) * .036); letter-spacing: .16em; }
+  .cv-title { font-family: var(--serif); font-size: calc(var(--d) * .155 * var(--fc, 1)); line-height: .9; letter-spacing: -.015em; text-transform: uppercase; }
+  .cv-bot { font-size: calc(var(--d) * .04); letter-spacing: .1em; }
+  .cv .vhs { font-size: calc(var(--d) * .045); padding: calc(var(--d) * .014) calc(var(--d) * .02); }
+  .art { flex: 1; min-height: 0; border: 1px solid var(--fg); --u: calc(var(--d) * .03); }
+  .art.sun { background: radial-gradient(circle at 50% 56%, var(--ac) 0 25%, transparent 25.5%), repeating-linear-gradient(0deg, var(--fg) 0 1px, transparent 1px var(--u)) bottom / 100% 44% no-repeat; }
+  .art.waves { background: radial-gradient(circle at 72% 26%, var(--ac) 0 15%, transparent 15.5%), repeating-radial-gradient(circle at 50% 115%, var(--fg) 0 1.5px, transparent 1.5px var(--u)); }
+  .art.stripes { background: radial-gradient(circle at 36% 40%, var(--ac) 0 30%, transparent 30.5%), repeating-linear-gradient(135deg, var(--fg) 0 1.5px, transparent 1.5px var(--u)); }
+  .art.dots { background: radial-gradient(circle at 50% 100%, var(--ac) 0 46%, transparent 46.5%), radial-gradient(circle, var(--fg) 0 26%, transparent 29%) 0 0 / var(--u) var(--u); }
+  .art.split { background: radial-gradient(circle at 50% 50%, var(--bg) 0 22%, transparent 22.5%), linear-gradient(180deg, var(--ac) 0 50%, var(--fg) 50%); }
+  .art.rings { background: repeating-radial-gradient(circle at 50% 50%, var(--ac) 0 calc(var(--u) * .6), transparent calc(var(--u) * .6) calc(var(--u) * 1.4)); }
+
+  /* ---------- play ring ---------- */
+  .play {
+    position: fixed; left: 0; top: 0; width: 42px; height: 42px; margin: -21px 0 0 -21px; z-index: 35;
+    border: 1px solid var(--cobalt); border-radius: 50%; color: var(--cobalt); background: rgba(237,235,230,.75);
+    display: grid; place-items: center; transform: scale(0);
+  }
+
+  /* ---------- caption ---------- */
+  .cap {
+    position: fixed; left: 0; right: 0; top: calc(50% + var(--H) / 2 + 30px); z-index: 20;
+    display: flex; flex-direction: column; align-items: center; gap: 9px; pointer-events: none;
+  }
+  .m { display: grid; overflow: hidden; width: min(92vw, 760px); text-align: center; }
+  .m > span { grid-area: 1 / 1; display: block; }
+  .c-title { font-family: var(--serif); font-size: 31px; line-height: 1.12; letter-spacing: -.01em; }
+  .c-sub { color: var(--cobalt); font-weight: 500; }
+  .c-meta { font-weight: 500; font-size: 11px; letter-spacing: .08em; }
+
+  .arrow { position: fixed; top: calc(50% + var(--H) / 2 + 40px); width: 44px; height: 44px; display: grid; place-items: center; z-index: 25; }
+  .arrow.l { left: 20px; } .arrow.r { right: 20px; }
+
+  .foot { position: fixed; left: 32px; right: 32px; bottom: 26px; display: flex; justify-content: space-between; z-index: 30; }
+
+  /* ---------- cursor ---------- */
+  .cur { position: fixed; left: 0; top: 0; width: 58px; height: 58px; margin: -29px 0 0 -29px; z-index: 100; pointer-events: none; display: none; }
+  @media (pointer: fine) { .cur { display: block; } }
+  .cur .ring { position: absolute; inset: 0; border: 1.5px solid var(--ink); border-radius: 50%; transition: transform .5s var(--ease), background-color .4s var(--ease), border-color .4s var(--ease); }
+  .cur .dot { position: absolute; left: 26px; top: 26px; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); transition: transform .4s var(--ease); }
+  .cur .cl { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; color: #fff; font-weight: 600; font-size: 10px; line-height: 1.25; letter-spacing: .1em; transform: scale(0); transition: transform .45s var(--ease); }
+  .cur.spine .ring { transform: scale(.72); }
+  .cur.btn .ring { transform: scale(.55); }
+  .cur.btn .dot { transform: scale(0); }
+  .cur.open .ring { transform: scale(1.75); background: var(--cobalt); border-color: var(--cobalt); }
+  .cur.open .dot { transform: scale(0); }
+  .cur.open .cl { transform: scale(1); }
+
+  /* ---------- opening sheet ---------- */
+  .sheet {
+    position: fixed; inset: 0; z-index: 60; background: var(--sheet); visibility: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px;
+  }
+  .sheet .m { width: min(92vw, 1000px); }
+  .s-title { font-family: var(--serif); font-size: clamp(48px, 9vw, 132px); line-height: 1; letter-spacing: -.025em; }
+  .s-lbl { color: var(--cobalt); }
+  .s-url { color: var(--muted); }
+
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .sr:focus-within { position: fixed; left: 16px; bottom: 60px; width: auto; height: auto; clip: auto; z-index: 70; background: var(--sheet); padding: 12px 16px; border: 1px solid var(--rule); list-style: none; }
+
+  @media (max-width: 767px) {
+    :root { --H: min(60vw, 40svh); }
+    .top { height: 64px; padding: 0 16px; }
+    .logo b { font-size: 20px; }
+    .logo span { font-size: 7.5px; }
+    .lbl { font-size: 9px; }
+    .top .career, .top #handle { display: none; }
+    .top { grid-template-columns: 1fr; justify-items: center; }
+    .tabs { top: calc(50% - var(--H) / 2 - 70px); }
+    .tabs button { padding: 0 7px; }
+    .c-title { font-size: 24px; }
+    .arrow.l { left: 6px; } .arrow.r { right: 6px; }
+    .foot { left: 16px; right: 16px; bottom: 18px; }
+  }
+</style>
+</head>
+<body>
+  <header class="top">
+    <a class="lbl box" id="handle" href="#"></a>
+    <div class="logo"><b id="name"></b><span id="role"></span></div>
+    <span class="lbl career" id="since"></span>
+  </header>
+
+  <nav class="tabs lbl" aria-label="Kategori"><i></i></nav>
+
+  <section class="shelf" aria-label="Rak link"><div class="stage"></div></section>
+
+  <button class="play" aria-label="Buka link">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 11 L11 3 M4.5 3 H11 V9.5"/></svg>
+  </button>
+
+  <div class="cap" aria-live="polite">
+    <div class="m c-title"></div>
+    <div class="m c-sub lbl"></div>
+    <div class="m c-meta"></div>
+  </div>
+
+  <button class="arrow l" aria-label="Link sebelumnya"><svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 1 L1 5 L5 9 M1 5 H17"/></svg></button>
+  <button class="arrow r" aria-label="Link berikutnya"><svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M13 1 L17 5 L13 9 M17 5 H1"/></svg></button>
+
+  <footer class="foot lbl"><span id="copy"></span><span>Geser / Scroll · ← →</span></footer>
+
+  <ul class="sr" id="srlist"></ul>
+
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Membuka link">
+    <div class="m s-lbl lbl"><span>Membuka / Opening</span></div>
+    <div class="m s-title"><span></span></div>
+    <div class="m s-url lbl"><span></span></div>
+  </div>
+
+  <div class="grain"></div>
+  <div class="cur"><div class="ring"></div><div class="dot"></div><div class="cl">BUKA<br>OPEN</div></div>
+
+<script>
+/* =====================================================
+   GANTI DI SINI AJA. Semua isi halaman diambil dari sini.
+   theme: cobalt | ink | vermilion | cream | ochre | green
+   art:   sun | waves | stripes | dots | split | rings
+   icon:  (opsional) logo di bulatan spine, nama dari simpleicons.org, contoh github
+   ===================================================== */
+const PROFILE = {
+  name: "Mochamad Fahmi Pahrezi",
+  short: "Fahmi Pahrezi", // dipakai di spine & cover kaset (nama panjang gak muat)
+  role: "Software Engineer · Cloud Architect",
+  handle: "@mrfahmiprz",
+  handleUrl: "https://www.instagram.com/mrfahmiprz",
+  since: "Est. 2020 · Bandung, ID · Open for Collaboration",
+};
+const LINKS = [
+  { title: "Instagram",  sub: "@mrfahmiprz",       cat: "Social",    url: "https://instagram.com/mrfahmiprz",        theme: "cobalt",    art: "sun",     icon: "instagram" },
+  { title: "TikTok",     sub: "@thisfakemee",      cat: "Social",    url: "https://tiktok.com/@thisfakemee",         theme: "ink",       art: "waves",   icon: "tiktok" },
+  { title: "GitHub",     sub: "@fahmiphz",        cat: "Project",   url: "https://github.com/fahmiphz",             theme: "cream",     art: "stripes", icon: "github" },
+  { title: "Syva IoT",   sub: "Dashboard IoT",     cat: "Project",   url: "https://syva-iota.vercel.app",            theme: "green",     art: "rings",   icon: "vercel" },
+  { title: "Sentra-RPL", sub: "LMS",               cat: "Project",   url: "https://sentra-rplsmkitassyifa.site/",    theme: "cream",     art: "dots" },
+  { title: "Prodi RPL",  sub: "Dashboard",         cat: "Project",   url: "https://prodirplsmkitassyifa.site/",      theme: "ochre",     art: "split" },
+  { title: "PMB",        sub: "Daftar lewat sini", cat: "Affiliate", url: "https://pmb.assyifa.info/?q=169975",      theme: "vermilion", art: "stripes" },
+  { title: "Email",      sub: "Buat kerja sama",   cat: "Contact",   url: "mailto:fahmipahrezi23@gmail.com",         theme: "ink",       art: "sun",     icon: "gmail" },
+  { title: "WhatsApp",   sub: "Chat langsung",     cat: "Contact",   url: "https://wa.me/6285122422174",             theme: "green",     art: "waves",   icon: "whatsapp" },
+];
+const START = 0; // link yang kebuka pertama kali (0 = paling atas)
+
+/* ---------- engine (gak perlu diubah) ---------- */
+const THEMES = {
+  cobalt:    ["#1F3FB0", "#EDE6D6", "#D2462B", "#F4EEE2"],
+  ink:       ["#1B1A18", "#EDE6D6", "#D2462B", "#F4EEE2"],
+  vermilion: ["#C9432A", "#F1E8D8", "#1B1A18", "#F4EEE2"],
+  cream:     ["#E8E0CE", "#1B1A18", "#1F3FB0", "#F4EEE2"],
+  ochre:     ["#D4A645", "#1B1A18", "#C9432A", "#F4EEE2"],
+  green:     ["#2E5B47", "#EDE6D6", "#D4A645", "#1B1A18"],
+};
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (q) => document.querySelector(q);
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const N = LINKS.length;
+const COPIES = Math.max(3, Math.ceil(36 / N));
+const L = N * COPIES;
+const mod = (x, m) => ((x % m) + m) % m;
+const wrap = (x, m) => { const r = mod(x, m); return r >= m / 2 ? r - m : r; };
+const ss = (x) => x * x * (3 - 2 * x);
+const B = (r) => Math.abs(r) < 1 ? (r + Math.sin(Math.PI * r) / Math.PI) / 2 : Math.sign(r) * 0.5;
+const host = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch { return u; } };
+const pad = (n) => String(n).padStart(2, "0");
+
+// profile
+$("#name").textContent = PROFILE.name;
+$("#role").textContent = PROFILE.role;
+$("#handle").textContent = PROFILE.handle;
+$("#handle").href = PROFILE.handleUrl;
+$("#since").textContent = PROFILE.since;
+$("#copy").textContent = `© ${new Date().getFullYear()} ${PROFILE.name}`;
+document.title = `${PROFILE.name} — Links`;
+$("#srlist").innerHTML = LINKS.map((l) => `<li><a href="${esc(l.url)}">${esc(l.title)} — ${esc(l.sub)}</a></li>`).join("");
+
+// tapes
+const stage = $(".stage");
+const tapes = [];
+for (let v = 0; v < L; v++) {
+  const i = v % N, l = LINKS[i], [bg, fg, ac, on] = THEMES[l.theme] || THEMES.cream;
+  const el = document.createElement("a");
+  el.className = "tape";
+  el.href = l.url;
+  el.tabIndex = -1;
+  el.setAttribute("aria-hidden", "true");
+  el.draggable = false;
+  const longest = Math.max(...l.title.split(/\s+/).map((w) => w.length));
+  el.style.cssText = `--bg:${bg};--fg:${fg};--ac:${ac};--on:${on};--fs:${Math.min(1, 5.6 / l.title.length)};--fc:${Math.min(1, 6.5 / longest)}`;
+  el.innerHTML = `
+    <div class="face sp"><i class="sp-dot${l.icon ? " ic" : ""}"${l.icon ? ` style="--icon:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/${encodeURIComponent(l.icon)}.svg)"` : ""}></i><span class="sp-no">${pad(i + 1)}</span><span class="sp-title">${esc(l.title)}</span><span class="sp-name">${esc(PROFILE.short)}</span><span class="vhs">VHS</span></div>
+    <div class="face cv"><div class="cv-top"><span>A ${esc(PROFILE.short)} link</span><span>№ ${pad(i + 1)}</span></div><div class="cv-title">${esc(l.title)}</div><div class="art ${esc(l.art)}"></div><div class="cv-bot"><span>${esc(l.sub)}</span><span class="vhs">VHS</span></div></div>`;
+  stage.append(el);
+  const t = { el, v, i, sp: el.children[0], cv: el.children[1], lift: 0 };
+  el.addEventListener("pointerenter", () => (hover = v));
+  el.addEventListener("pointerleave", () => { if (hover === v) hover = -1; });
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (dragged || isOpen) return;
+    const r = wrap(v - s, L);
+    if (Math.abs(r) < 0.5) openLink();
+    else T = Math.round(T + wrap(v - T, L));
+  });
+  tapes.push(t);
+}
+
+// tabs
+const cats = [...new Set(LINKS.map((l) => l.cat))];
+const nav = $(".tabs"), ind = nav.querySelector("i");
+const tabBtns = ["Semua / All", ...cats].map((c, k) => {
+  const b = document.createElement("button");
+  b.textContent = c;
+  b.addEventListener("click", () => goTo(k === 0 ? 0 : LINKS.findIndex((l) => l.cat === cats[k - 1])));
+  nav.append(b);
+  return b;
+});
+function updateTabs() {
+  const k = cats.indexOf(LINKS[active].cat) + 1;
+  tabBtns.forEach((b, j) => b.classList.toggle("on", j === k));
+  const b = tabBtns[k];
+  ind.style.width = b.offsetWidth + "px";
+  ind.style.transform = `translateX(${b.offsetLeft}px)`;
+}
+
+// geometry
+const probe = document.createElement("div");
+probe.style.cssText = "position:fixed;left:-9px;top:0;width:1px;height:var(--H);visibility:hidden";
+document.body.append(probe);
+let H, ws, d, gap, W, VH;
+function measure() {
+  H = probe.getBoundingClientRect().height;
+  ws = H * 142 / 840; d = H * 474 / 900; gap = H * 0.03;
+  W = innerWidth; VH = innerHeight;
+  stage.style.setProperty("--Hp", H + "px");
+  stage.style.setProperty("--ws", ws + "px");
+  stage.style.setProperty("--d", d + "px");
+  if (active >= 0) updateTabs();
+}
+
+// state
+let s = START + N * Math.floor(COPIES / 2), T = s, hover = -1, active = -1;
+let mx = -999, my = -999, cx = mx, cy = my, tiltX = 0, tiltY = 0, onCover = false, isOpen = false, overBtn = false;
+let dragging = false, dragged = false, down = null;
+measure();
+addEventListener("resize", measure);
+
+function goTo(i) { if (isOpen) return; T = Math.round(T) + wrap(i - mod(Math.round(T), N), N); }
+
+// caption
+const capT = $(".c-title"), capS = $(".c-sub"), capM = $(".c-meta");
+const SLIDE = { duration: 650, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" };
+function swap(mask, text, dir) {
+  const n = document.createElement("span");
+  n.textContent = text;
+  if (RM || !mask.children.length) { mask.replaceChildren(n); return; }
+  for (const o of [...mask.children]) {
+    if (o.dataset.leaving) continue;
+    o.dataset.leaving = 1;
+    const from = getComputedStyle(o).transform;
+    o.animate([{ transform: from === "none" ? "translateY(0)" : from }, { transform: `translateY(${-dir * 105}%)` }], SLIDE).onfinish = () => o.remove();
+  }
+  mask.append(n);
+  n.animate([{ transform: `translateY(${dir * 105}%)` }, { transform: "translateY(0)" }], SLIDE);
+}
+function setActive(i, dir) {
+  active = i;
+  const l = LINKS[i];
+  swap(capT, l.title, dir);
+  swap(capS, `${l.sub} / ${l.cat}`, dir);
+  swap(capM, `${pad(i + 1)} / ${pad(N)}`, dir);
+  updateTabs();
+}
+
+// opening sheet
+const sheet = $(".sheet"), play = $(".play"), cur = $(".cur");
+let navTimer = 0;
+function activeTape() { return tapes.find((t) => Math.abs(wrap(t.v - s, L)) < 0.5); }
+function coverRect() { const t = activeTape(); return t ? t.cv.getBoundingClientRect() : new DOMRect(W / 2 - d / 2, VH / 2 - H / 2, d, H); }
+function openLink() {
+  if (isOpen) return;
+  isOpen = true;
+  T = s = Math.round(T);
+  const l = LINKS[active], r = coverRect();
+  sheet.querySelector(".s-title span").textContent = l.title;
+  sheet.querySelector(".s-url span").textContent = host(l.url);
+  sheet.style.visibility = "visible";
+  sheet.style.transformOrigin = `${r.left + r.width / 2}px ${r.top + r.height / 2}px`;
+  sheet.animate([
+    { clipPath: `inset(${r.top}px ${W - r.right}px ${VH - r.bottom}px ${r.left}px round 3px)`, transform: "rotate(-4.5deg)" },
+    { clipPath: "inset(0px 0px 0px 0px round 0px)", transform: "rotate(0deg)" },
+  ], { duration: RM ? 1 : 1050, easing: "cubic-bezier(.76,0,.18,1)", fill: "both" });
+  sheet.querySelectorAll(".m > span").forEach((sp, k) => sp.animate(
+    [{ transform: "translateY(110%)" }, { transform: "translateY(0)" }],
+    { duration: RM ? 1 : 900, delay: RM ? 0 : 520 + k * 75, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }));
+  navTimer = setTimeout(() => (location.href = l.url), RM ? 150 : 1500);
+}
+function closeSheet(instant) {
+  clearTimeout(navTimer);
+  if (!isOpen) return;
+  const done = () => { sheet.getAnimations({ subtree: true }).forEach((a) => a.cancel()); sheet.style.visibility = "hidden"; isOpen = false; };
+  if (instant || RM) return done();
+  const r = coverRect();
+  sheet.animate([
+    { clipPath: "inset(0px 0px 0px 0px round 0px)", transform: "rotate(0deg)" },
+    { clipPath: `inset(${r.top}px ${W - r.right}px ${VH - r.bottom}px ${r.left}px round 3px)`, transform: "rotate(-4.5deg)" },
+  ], { duration: 850, easing: "cubic-bezier(.76,0,.18,1)", fill: "both" }).onfinish = done;
+}
+addEventListener("pageshow", (e) => { if (e.persisted) closeSheet(true); });
+play.addEventListener("click", openLink);
+
+// inputs
+$(".arrow.l").addEventListener("click", () => { if (!isOpen) T = Math.round(T) - 1; });
+$(".arrow.r").addEventListener("click", () => { if (!isOpen) T = Math.round(T) + 1; });
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape") return closeSheet();
+  if (isOpen) return;
+  if (e.key === "ArrowLeft") T = Math.round(T) - 1;
+  else if (e.key === "ArrowRight") T = Math.round(T) + 1;
+  else if (e.key === "Enter" && document.activeElement === document.body) openLink();
+});
+let wheelTimer = 0;
+addEventListener("wheel", (e) => {
+  e.preventDefault();
+  if (isOpen) return;
+  const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  T += delta / (ws + gap) * 0.5;
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(() => (T = Math.round(T)), 160);
+}, { passive: false });
+$(".shelf").addEventListener("pointerdown", (e) => { if (!isOpen) { down = { x: e.clientX, T0: T }; dragged = false; } });
+addEventListener("pointermove", (e) => {
+  mx = e.clientX; my = e.clientY;
+  overBtn = !!e.target.closest?.("button, a:not(.tape)");
+  if (!down) return;
+  const dx = e.clientX - down.x;
+  if (!dragging && Math.abs(dx) > 5) dragging = dragged = true;
+  if (dragging) T = down.T0 - dx / (ws + gap);
+});
+const release = () => {
+  if (dragging) T = Math.round(T);
+  dragging = false; down = null;
+  setTimeout(() => (dragged = false), 0);
+};
+addEventListener("pointerup", release);
+addEventListener("pointercancel", release);
+
+// loop
+let last = performance.now();
+cx = mx; cy = my;
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  const k = RM ? 1e3 : dragging ? 18 : 5.2;
+  s += (T - s) * (1 - Math.exp(-k * dt));
+  if (Math.abs(T - s) < 1e-4) s = T;
+  if (s > 3 * L) { s -= L; T -= L; } else if (s < -2 * L) { s += L; T += L; }
+
+  const a = mod(Math.round(s), N);
+  if (a !== active) setActive(a, Math.sign(T - s) || 1);
+
+  const settled = Math.abs(T - s) < 0.3;
+  onCover = !isOpen && settled && Math.abs(mx - W / 2) < 0.55 * d && Math.abs(my - VH / 2) < 0.55 * H;
+  const ty0 = onCover ? (mx - W / 2) / (0.55 * d) * 9 : (mx < 0 ? 0 : (mx - W / 2) / W * 5);
+  const tx0 = onCover ? -(my - VH / 2) / (H / 2) * 6 : 0;
+  const te = 1 - Math.exp(-7 * dt);
+  tiltY += (ty0 - tiltY) * te; tiltX += (tx0 - tiltX) * te;
+
+  const le = RM ? 1 : 1 - Math.exp(-12 * dt);
+  for (const t of tapes) {
+    const r = wrap(t.v - s, L);
+    const x = r * (ws + gap) + (d - ws + 1.6 * gap) * B(r);
+    if (Math.abs(x) > W / 2 + 1.5 * d) { if (t.vis !== false) { t.el.style.visibility = "hidden"; t.vis = false; } continue; }
+    if (t.vis !== true) { t.el.style.visibility = ""; t.vis = true; }
+    const o = ss(Math.max(0, 1 - Math.abs(r)));
+    t.lift += ((hover === t.v && Math.abs(r) > 0.5 && !isOpen ? 1 : 0) - t.lift) * le;
+    const ty = -o * 0.025 * H - t.lift * 0.045 * H;
+    t.el.style.transform = `translate3d(${x}px,${ty}px,${o * 0.2 * H}px) rotateZ(${-4.5 * o}deg) rotateX(${tiltX * o}deg) rotateY(${-90 * o + tiltY * o}deg)`;
+    t.el.style.zIndex = Math.round(100 - Math.abs(r) * 4);
+    t.sp.style.setProperty("--shade", (o * 0.55).toFixed(3));
+    t.cv.style.setProperty("--shade", ((1 - o) * 0.5).toFixed(3));
+  }
+
+  const p = isOpen ? 0 : ss(Math.max(0, 1 - Math.abs(T - s) * 3));
+  play.style.transform = `translate3d(${W / 2 - 0.5 * d - 6}px, ${VH / 2 + 0.36 * H}px, 0) scale(${p})`;
+
+  const ce = 1 - Math.exp(-16 * dt);
+  cx += (mx - cx) * ce; cy += (my - cy) * ce;
+  cur.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+  const hv = hover >= 0 && !isOpen && Math.abs(wrap(hover - s, L)) > 0.5;
+  cur.classList.toggle("open", onCover);
+  cur.classList.toggle("spine", !onCover && hv);
+  cur.classList.toggle("btn", !onCover && !hv && overBtn);
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+document.fonts?.ready.then(() => active >= 0 && updateTabs());
+</script>
+</body>
+</html>
